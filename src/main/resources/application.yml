@@ -1,0 +1,8 @@
+
+server:
+  port: 8091
+
+application:
+  client:
+    endpoint:
+      fipe: "http://fipeapi.appspot.com/api/1/carros/"
