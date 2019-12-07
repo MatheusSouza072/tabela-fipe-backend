@@ -28,7 +28,7 @@ public class SetValueVehicleAnnual {
             lastElement.addToSentence(",");
             sentence = createSentenceComparison(vehicle, lastElement);
         }else{
-            sentence = createSentence(vehicle);
+            sentence = yearVehicle(vehicle);
         }
         return sentence;
     }
@@ -43,12 +43,17 @@ public class SetValueVehicleAnnual {
         return annualValueVehicles.get(annualValueVehicles.size()-1);
     }
 
-    private String createSentence(Vehicle vehicle){
-        return "Value in " + vehicle.getAnoModelo() + " -> " + vehicle.getPreco();
+    private String yearVehicle(Vehicle vehicle){
+        return vehicle.getAnoModelo() + " -> " + vehicle.getPreco();
+    }
+    private String valueVehicle(Vehicle vehicle) {
+        return vehicle.getPreco();
     }
 
+
     private String createSentenceComparison(Vehicle vehicle, AnnualValueVehicle lastElement){
-        String sentence = createSentence(vehicle);
+        String sentence = yearVehicle(vehicle);
+        String sentence2 = valueVehicle(vehicle);
         double difference = lastElement.getPreco() - vehicle.getPrecoDouble();
         double percent = (difference * 100) / lastElement.getPreco();
         sentence += " change of R$ " + formatter.format(difference);
