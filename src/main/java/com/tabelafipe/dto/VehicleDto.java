@@ -33,6 +33,6 @@ public class VehicleDto {
 
     private String time;
 
-    private String veiculo;
+    private String vehicle;
 
 }

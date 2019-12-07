@@ -12,7 +12,7 @@ public class ExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ResponseStatus(code = HttpStatus.BAD_REQUEST)
     @org.springframework.web.bind.annotation.ExceptionHandler(value = FeignException.class)
-    public ResponseEntity handleFeignException(FeignException ex) {
+    public ResponseEntity handlesFeignException(FeignException ex) {
         if(ex.status() == 404)
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("data not found");
         return ResponseEntity.status(HttpStatus.resolve(500)).body("");

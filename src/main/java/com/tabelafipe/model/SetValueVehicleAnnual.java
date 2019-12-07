@@ -8,51 +8,51 @@ import static com.tabelafipe.util.Utils.formatPercent;
 
 public class SetValueVehicleAnnual {
 
-    private List<ValueVehicleAnnual> valueVehicleAnnuals = new ArrayList<>();
+    private List<AnnualValueVehicle> annualValueVehicles = new ArrayList<>();
 
-    private DecimalFormat formatator = new DecimalFormat("#,##0.00");
+    private DecimalFormat formatter = new DecimalFormat("#,##0.00");
 
     public void add(Vehicle vehicle){
-        ValueVehicleAnnual valueVehicleAnnual = new ValueVehicleAnnual();
-        valueVehicleAnnual.setPreco(vehicle.getPrecoDouble());
-        valueVehicleAnnual.setSentense(getSentence(vehicle));
-        valueVehicleAnnual.setYear(vehicle.getAnoModelo());
-        valueVehicleAnnuals.add(valueVehicleAnnual);
+        AnnualValueVehicle annualValueVehicle = new AnnualValueVehicle();
+        annualValueVehicle.setPreco(vehicle.getPrecoDouble());
+        annualValueVehicle.setSentence(getSentence(vehicle));
+        annualValueVehicle.setYear(vehicle.getAnoModelo());
+        annualValueVehicles.add(annualValueVehicle);
     }
 
 
     private String getSentence(Vehicle vehicle){
         String sentence;
-        if(valueVehicleAnnuals.size() > 0) {
-            ValueVehicleAnnual lastElement = getLastElement();
+        if(annualValueVehicles.size() > 0) {
+            AnnualValueVehicle lastElement = getLastElement();
             lastElement.addToSentence(",");
-            sentence = createSentenceWithComparison(vehicle, lastElement);
+            sentence = createSentenceComparison(vehicle, lastElement);
         }else{
             sentence = createSentence(vehicle);
         }
         return sentence;
     }
 
-    public List<String> getValueVehicleAnnuals(){
+    public List<String> getAnnualValueVehicles(){
         List<String> sentences = new ArrayList<>();
-        valueVehicleAnnuals.forEach(depreciationDto -> sentences.add(depreciationDto.getSentense()));
+        annualValueVehicles.forEach(devaluationDto -> sentences.add(devaluationDto.getSentence()));
         return sentences;
     }
 
-    private ValueVehicleAnnual getLastElement(){
-        return valueVehicleAnnuals.get(valueVehicleAnnuals.size()-1);
+    private AnnualValueVehicle getLastElement(){
+        return annualValueVehicles.get(annualValueVehicles.size()-1);
     }
 
     private String createSentence(Vehicle vehicle){
-        return "Valor em " + vehicle.getAnoModelo() + " -> " + vehicle.getPreco();
+        return "Value in " + vehicle.getAnoModelo() + " -> " + vehicle.getPreco();
     }
 
-    private String createSentenceWithComparison(Vehicle vehicle, ValueVehicleAnnual lastElement){
+    private String createSentenceComparison(Vehicle vehicle, AnnualValueVehicle lastElement){
         String sentence = createSentence(vehicle);
         double difference = lastElement.getPreco() - vehicle.getPrecoDouble();
         double percent = (difference * 100) / lastElement.getPreco();
-        sentence += " alteração de R$ " + formatator.format(difference);
-        sentence += " (" + formatPercent(percent) + "%) em relação a " + lastElement.getYear();
+        sentence += " change of R$ " + formatter.format(difference);
+        sentence += " (" + formatPercent(percent) + "%) in relation to " + lastElement.getYear();
         return sentence;
     }
 }

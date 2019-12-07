@@ -21,10 +21,10 @@ public class VehicleController {
         return vehicleService.listByBrand(idBrand);
     }
   
-    @GetMapping("/depreciations/brands/{idBrand}/models/{idModel}")
-    public List<String> listDepreciations(@PathVariable("idBrand") Long idBrand,
+    @GetMapping("/devaluations/brands/{idBrand}/models/{idModel}")
+    public List<String> listDevaluations(@PathVariable("idBrand") Long idBrand,
                                           @PathVariable("idModel") Long idModel){
-        return vehicleService.listDepretiations(idBrand, idModel);
+        return vehicleService.listDevaluations(idBrand, idModel);
     }
 
 }

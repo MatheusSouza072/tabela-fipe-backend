@@ -21,11 +21,11 @@ public class VehicleServiceImpl implements VehicleService {
     @Override
     public List<VehicleDto> listByBrand(Long idBrand) {
         List<Vehicle> vehicles = fipeClient.listAllVehicles(idBrand);
-        return toDtoList(vehicles);
+        return dtoList(vehicles);
     }
 
     @Override
-    public List<String> listDepretiations(Long idBrand, Long idModel) {
+    public List<String> listDevaluations(Long idBrand, Long idModel) {
         List<Vehicle> vehicles;
         vehicles = fipeClient.listAllVehiclesByModel(idBrand, idModel);
         SetValueVehicleAnnual valueVehicleAnnual = new SetValueVehicleAnnual();
@@ -33,10 +33,10 @@ public class VehicleServiceImpl implements VehicleService {
             detail = fipeClient.getDetailVehicle(idBrand, idModel, detail.getKey());
             valueVehicleAnnual.add(detail);
         }
-        return valueVehicleAnnual.getValueVehicleAnnuals();
+        return valueVehicleAnnual.getAnnualValueVehicles();
     }
 
-    private List<VehicleDto> toDtoList(List<Vehicle> vehicles){
+    private List<VehicleDto> dtoList(List<Vehicle> vehicles){
         ModelMapper modelMapper = new ModelMapper();
         List<VehicleDto> vehicleDtos = new ArrayList<>();
         vehicles.forEach(vehicle -> vehicleDtos.add(modelMapper.map(vehicle, VehicleDto.class)));
