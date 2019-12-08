@@ -44,7 +44,7 @@ public class SetValueVehicleAnnual {
     }
 
     private String yearVehicle(Vehicle vehicle){
-        return vehicle.getAnoModelo() + " -> " + vehicle.getPreco();
+        return "Value in " + vehicle.getAnoModelo() + " -> " + vehicle.getPreco();
     }
 
 
